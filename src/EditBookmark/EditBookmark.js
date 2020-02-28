@@ -9,7 +9,7 @@ const Required = () => (
 
 export default class EditBookmark extends React.Component{
   state = {
-    id:'',
+    id: '',
     title:'',
     url:'',
     description: '',
@@ -19,11 +19,12 @@ export default class EditBookmark extends React.Component{
   static contextType = BookmarksContext;
 
   componentDidMount() {
-    const bookmarkId = this.props.match.params.bookmarkId
-    fetch(`https://localhost:3000/api/bookmarks/${bookmarkId}`, {
+    const bookmarkId = this.props.match.params.id
+    console.log(bookmarkId)
+    fetch(`https://localhost:8000/api/bookmarks/${bookmarkId}`, {
       method: 'GET', 
       headers: {
-        'authorization': `Bearer ${config.API_KEY}`
+        'content-type': 'application/json',
       }
     })
       .then(res => {
@@ -32,15 +33,16 @@ export default class EditBookmark extends React.Component{
         }
         return res.json()
       })
-      .then(responseData => {
-        this.setState({
-          id: responseData.id,
-          title: responseData.title,
-          url: responseData.url,
-          description: responseData.description,
-          rating: responseData.rating
-        })
-      })
+      // .then(responseData => {
+      //   this.setState({
+      //     id: responseData.id,
+      //     title: responseData.title,
+      //     url: responseData.url,
+      //     description: responseData.description,
+      //     rating: responseData.rating
+      //   })
+      // })
+      .then(res => console.log(res))
   }
 
   handleClickCancel = () => {
@@ -49,7 +51,7 @@ export default class EditBookmark extends React.Component{
 
   handleSubmit = (bookmark, callback) => {
     const { bookmarkId } = this.props.match.params
-    fetch(`https://localhost:3000/api/bookmarks/${bookmarkId}`, {
+    fetch(`https://localhost:8000/api/bookmarks/${bookmarkId}`, {
       method: 'PATCH',
       body: JSON.stringify(bookmark),
       headers: {
@@ -72,6 +74,7 @@ export default class EditBookmark extends React.Component{
 
   render() {
     const { title, url, description, rating } = this.state
+    console.log(this.state)
     return (
       <section className="EditBookmark__form">
         <h2>Edit Bookmark</h2>

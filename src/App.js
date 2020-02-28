@@ -37,8 +37,7 @@ class App extends Component {
     fetch(config.API_ENDPOINT, {
       method: 'GET',
       headers: {
-        'content-type': 'application/json',
-        'Authorization': `Bearer ${config.API_KEY}`
+        'content-type': 'application/json'
       }
     })
       .then(res => {
@@ -47,7 +46,9 @@ class App extends Component {
         }
         return res.json()
       })
-      .then(this.setBookmarks)
+      // .then(res => console.log(res))
+      .then(res => this.setState({ bookmarks: res }))
+      // .then(this.setBookmarks)
       .catch(error => this.setState({ error }))
   }
 
@@ -57,6 +58,7 @@ class App extends Component {
       addBookmark: this.addBookmark,
       updateBookmark:this.updateBookmark,
     }
+    console.log(this.state.bookmarks)
     return (
       <main className='App'>
         <h1>Bookmarks!</h1>
