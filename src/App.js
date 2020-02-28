@@ -65,7 +65,7 @@ class App extends Component {
         <div className='content' aria-live='polite'>
           <Route
             exact
-            path='/'
+            path='/bookmarks'
             component={BookmarkList}
           />
           <Route 
