@@ -1,4 +1,5 @@
 import React from 'react';
+import { Route, Link } from 'react-router-dom';
 import Rating from '../Rating/Rating';
 import './BookmarkItem.css';
 
@@ -26,6 +27,11 @@ export default function BookmarkItem(props) {
         >
           Delete
         </button>
+        <button className='BookmarkItem__description'>
+          <Link to={`/edit-bookmark/${props.id}`}>
+            Edit
+          </Link>
+        </button> 
       </div>
     </li>
   )
